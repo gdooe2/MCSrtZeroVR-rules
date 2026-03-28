@@ -5,7 +5,7 @@
 
 # 更新日志
   *b.012*
-   > 添加：SlimeFun的额外插件：
+   - 添加：SlimeFun的额外插件：
    > ColoredEnderChests,
    > ElectricSpawners,
    > ExoticGarden,
