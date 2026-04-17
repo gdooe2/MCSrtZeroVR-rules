@@ -4,12 +4,16 @@
 
 
 # 更新日志
-  *b.013/debug*
+  *b.014/debug*
 - **添加：**
-  
-  - 添加举报插件
-  - 添加Nameplates插件
-- **更新：**
+  - 个性签名
+  - mcft(面部捕捉)
+  - 展示物品
+  - 添加玩家仓库
+- **修复：**
+  - CustomNameplates 无法加载原因
+ 
 
-  - 更新quickshop插件
-  - 更新vivecraft（VR）扩展
+
+
+# 往前更新日志 ↓
