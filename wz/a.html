@@ -200,7 +200,7 @@
     <div class="container">
         <!-- 页面1：头部信息 -->
         <div class="page1">
-            <div class="server-status">服务器状态: 还没有跑路呢~</div>
+            <div class="server-status">服务器状态: √在线</div>
             <div class="main-title">欢迎来到 现实中的旅人</div>
             <div class="vr-title">SrtZeroVR社区!</div>
             
@@ -214,7 +214,7 @@
 
             <div class="buttons">
                 <button class="btn copy" onclick="copyIP()">复制服务器IP</button>
-                <button class="btn group" onclick="joinGroup()">加入群聊</button>
+                <button class="btn group" onclick="joinGroup()">加入频道</button>
             </div>
         </div>
 
@@ -244,7 +244,7 @@
     <script>
         // 复制IP功能
         function copyIP() {
-            const ip = "mc.srtzerovr.com:25565";
+            const ip = "mkmc.cc";
             navigator.clipboard.writeText(ip).then(() => {
                 showToast("服务器IP已复制！");
             }).catch(() => {
@@ -254,7 +254,7 @@
 
         // 加入群聊
         function joinGroup() {
-            showToast("群聊链接待配置");
+            window.open("https://pd.qq.com/s/bymjihp86?b=9")
             // 替换成你的群链接：window.open("你的QQ群/微信群地址")
         }
 
