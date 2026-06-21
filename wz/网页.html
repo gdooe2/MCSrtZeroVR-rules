@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 全局加载 Unifont 像素字体 */
+         @font-face {
+             font-family: 'Unifont';
+             src: url('unifont-16.0.04.otf') format('opentype');
+             font-weight: normal;
+             font-style: normal;
+             font-display: swap;
+         }
+         /* 全局应用字体 */
+         * {
+             font-family: 'Unifont', monospace;
+             image-rendering: pixelated;
+         }
+         body {
+             background-color: transparent;
+             color: #fff;
+             display: flex;
+             flex-direction: column;
+             height: 100vh;
+             overflow: hidden;
+         }
+
+        /* 顶部导航栏 */
+        header {
+            display: flex;
+            align-items: stretch;
+            background-color: #4A7035;
+            border-bottom: 2px solid #2F4F1F;
+            justify-content: space-between;
+        }
+
+        /* 左侧导航容器 */
+        .nav-left {
+            display: flex;
+            align-items: stretch;
+        }
+
+        /* 右侧功能按钮区 */
+        .nav-right {
+            display: flex;
+            align-items: stretch;
+        }
+
+        /* 头像方块 */
+        .logo {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border-right: 2px solid #2F4F1F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        /* 导航栏通用项 */
+        .nav-item {
+            position: relative;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 2px solid #2F4F1F;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .nav-item:hover {
+            background-color: #5A8045;
+        }
+
+        /* 下拉箭头样式 */
+        .dropdown-arrow {
+            margin-left: 6px;
+            font-size: 12px;
+        }
+
+        /* 下拉菜单 */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #333;
+            border: 2px solid #555;
+            min-width: 140px;
+            box-shadow: 3px 3px 0 #111;
+            z-index: 999;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #555;
+            transition: background-color 0.1s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* 主内容区 - iframe容器 */
+        .main-area {
+            flex: 1;
+            width: 100%;
+            border: 3px solid #333;
+            background-color: #ccc;
+            background-image: 
+                linear-gradient(45deg, #aaa 25%, transparent 25%),
+                linear-gradient(-45deg, #aaa 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #aaa 75%),
+                linear-gradient(-45deg, transparent 75%, #aaa 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+            position: relative;
+        }
+
+        /* 嵌入的网页 */
+        #contentFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* 底部输入框 */
+        footer {
+            width: 100%;
+        }
+
+        footer input {
+            width: 100%;
+            padding: 12px;
+            background-color: #888;
+            border: 2px solid #555;
+            border-top-color: #aaa;
+            border-left-color: #aaa;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        footer input:focus {
+            outline: none;
+            border-color: #fff;
+            border-top-color: #ddd;
+            border-left-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- 左侧导航区域 -->
+        <div class="nav-left">
+            <!-- 头像方块 -->
+            <div class="logo">
+                <img src="cat.jpg" alt="MC Server Logo">
+            </div>
+
+            <!-- 导航项 -->
+            <div class="nav-item">
+                SrtZeroVR
+            </div>
+
+            <div class="nav-item">
+                主页 <span class="dropdown-arrow">▼</span>
+                <div class="dropdown-menu">
+                    <a href="javascript:void(0)" onclick="loadPage('a.html')">首贝</a>
+                    <a href="javascript:void(0)" onclick="loadPage('news.html')">新闻</a>
+                    <a href="javascript:void(0)" onclick="loadPage('changelog.html')">更新日志</a>
+                    <a href="javascript:void(0)" onclick="loadPage('unknown.html')">？？？</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                社区 <span class="dropdown-arrow">▼</span>
+                <div class="dropdown-menu">
+                    <a href="javascript:void(0)" onclick="loadPage('posts.html')">帖子</a>
+                    <a href="javascript:void(0)" onclick="loadPage('chat.html')">聊天</a>
+                    <a href="javascript:void(0)" onclick="loadPage('unknown.html')">？？？</a>
+                </div>
+            </div>
+
+            <div class="nav-item" onclick="loadPage('https://gdooe2.github.io/MCSrtZeroVR-rules/')">规则</div>
+            <div class="nav-item" onclick="loadPage('info.html')">信息</div>
+            <div class="nav-item" onclick="loadPage('team.html')">团队</div>
+
+            <div class="nav-item">
+                关于 <span class="dropdown-arrow">▼</span>
+                <div class="dropdown-menu">
+                    <a href="javascript:void(0)" onclick="loadPage('help.html')">帮助</a>
+                    <a href="javascript:void(0)" onclick="loadPage('https://github.com/')">github</a>
+                    <a href="javascript:void(0)" onclick="loadPage('https://mkmc.cc/index.html')">麦块群组</a>
+                </div>
+            </div>
+
+            <div class="nav-item" onclick="loadPage('donate.html')">奉献</div>
+        </div>
+
+        <!-- 右上角功能按钮 -->
+        <div class="nav-right">
+            <div class="nav-item" onclick="refreshCache()">刷新缓存</div>
+            <div class="nav-item" onclick="loginPage()">登录</div>
+        </div>
+    </header>
+
+    <!-- 主内容区域：iframe用来嵌入网页 -->
+    <div class="main-area">
+        <iframe id="contentFrame" src="about:blank" frameborder="0"></iframe>
+    </div>
+
+
+    <script>
+        // 加载网页到iframe中
+        function loadPage(url) {
+            document.getElementById('contentFrame').src = url;
+        }
+
+        // 刷新缓存 - 重载当前iframe页面
+        function refreshCache(){
+            let frame = document.getElementById('contentFrame');
+            frame.src = frame.src;
+        }
+
+        // 跳转登录页面，可自行替换登录页地址
+        function loginPage(){
+            loadPage('login.html');
+        }
+
+        // 页面加载完成后，默认加载一个本地页面
+        window.onload = function() {
+            loadPage('a.html');
+        }
+    </script>
+</body>
+</html>

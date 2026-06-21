@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新日志</title>
+    <style>
+        /* 加载Unifont像素字体 */
+        @font-face {
+            font-family: 'Unifont';
+            src: url('unifont-16.0.04.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Unifont', monospace;
+        }
+
+        /* 页面底色改为白色 */
+        body {
+            background-color: #ffffff;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 20, 40, 0.65);
+            z-index: -1;
+        }
+
+        /* 通用容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 板块统一样式，磨砂玻璃质感 */
+        .page1,.page2,.page3 {
+            background: rgba(25, 45, 70, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(120, 220, 255, 0.3);
+            padding: 40px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .server-status {
+            font-size: 14px;
+            color: #a0e8ff;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-shadow: 0 0 8px #00bfff;
+        }
+
+        .vr-title {
+            font-size: 32px;
+            color: #7eff7e;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #29ff29;
+        }
+
+        .tags {
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg,#118833,#22bb55);
+            color: #fff;
+            padding: 6px 12px;
+            margin-right: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .desc {
+            font-size: 16px;
+            color: #e6f7ff;
+            margin-bottom: 10px;
+        }
+        .desc2 {
+            font-size: 20px;
+            color: #e6f7ff;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+        }
+
+        .btn.copy {
+            background: linear-gradient(135deg,#009933,#22cc55);
+            color: #fff;
+        }
+
+        .btn.group {
+            background: linear-gradient(135deg,#3377dd,#5599ff);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 26px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 6px #44aaff;
+        }
+
+        .feature-text {
+            font-size: 16px;
+            color: #e6f7ff;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .screenshot-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-box {
+            width: 280px;
+            height: 200px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(100, 200, 255, 0.4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #c0e8ff;
+        }
+
+        /* 提示弹窗 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* 新闻列表单独样式，适配MySQL读取数据 */
+        .news-item {
+            padding: 20px;
+            border-bottom: 1px solid rgba(120, 220, 255, 0.2);
+            margin-bottom: 15px;
+        }
+        .news-time {
+            color: #94d8ff;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头条新闻板块 -->
+        <div class="page1">
+            <div class="server-status">↓在GitHub编辑</div><a href="https://github.com/gdooe2/MCSrtZeroVR-rules">•</a>
+            <h1 class="main-title">更新日志</h1>
+            <h2 class="vr-title"></h2>
+            <p class="desc2">• 添加：</p>
+            <p class="desc">个性签名</p>
+            <p class="desc">mcft(面部捕捉)</p>
+            <p class="desc">展示物品</p>
+            <p class="desc">添加玩家仓库</p>
+            <p class="desc2">• 修复：</p>
+            <p class="desc">CustomNameplates 无法加载原因</p>
+            </p>
+            <div class="news-time">版本：b.014/debug 发布时间：2026-04-17</div>
+        </div>
+
+        <!-- 日常新闻列表板块 -->
+        <div class="page2">
+            <h3 class="section-title">历史更新日志</h3>
+
+            <!-- 单条新闻项，后续MySQL循环读取填充数据 -->
+            <div class="news-item">
+                <h4 class="main-title">更新日志</h4>
+                <div class="news-time">版本：b.013/debug 日期:null</div>
+                <p class="desc2"> • 添加：</p>
+                <p class="desc">添加举报插件</p>
+                <p class="desc">添加Nameplates插件</p>
+                <p class="desc2"> • 更新：</p>
+                <p class="desc">更新quickshop插件</p>
+                <p class="desc">更新vivecraft（VR）扩展</p>
+            </div>
+
+</body>
+</html>
